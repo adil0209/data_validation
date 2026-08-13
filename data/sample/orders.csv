@@ -1,0 +1,11 @@
+order_id,customer_email,order_amount,discount_amount,order_status
+1001,alice@example.com,120.50,10.00,DELIVERED
+1002,bob@example.com,45.00,0.00,SHIPPED
+1003,not-an-email,300.00,25.00,PENDING
+1004,carol@example.com,-15.00,0.00,PENDING
+1005,dave@example.com,999999.00,0.00,DELIVERED
+1006,,60.00,5.00,CANCELLED
+1007,erin@example.com,80.00,90.00,RETURNED
+1008,frank@example.com,150.00,15.00,UNKNOWN_STATUS
+1002,gina@example.com,75.00,0.00,SHIPPED
+1010,heidi@example.com,220.00,20.00,DELIVERED

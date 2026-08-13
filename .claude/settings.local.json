@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(java -version 2>&1)",
+      "PowerShell(python --version)",
+      "PowerShell(winget --version 2>&1)",
+      "PowerShell(py -0p 2>&1)",
+      "PowerShell(winget install --id EclipseAdoptium.Temurin.17.JDK -e --accept-package-agreements --accept-source-agreements --silent 2>&1)",
+      "PowerShell(python -m venv \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation\\\\.venv\")",
+      "PowerShell(& \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation\\\\.venv\\\\Scripts\\\\python.exe\" -m pip install --upgrade pip 2>&1)",
+      "PowerShell(& \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation\\\\.venv\\\\Scripts\\\\pip.exe\" install -e \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation[dev]\" 2>&1)",
+      "Bash(tasklist //FI \"IMAGENAME eq pip.exe\")",
+      "PowerShell(& \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation\\\\.venv\\\\Scripts\\\\pip.exe\" index versions pyspark 2>&1)",
+      "PowerShell(& \"c:\\\\Users\\\\adila\\\\OneDrive\\\\Desktop\\\\data_validation\\\\.venv\\\\Scripts\\\\pip.exe\" install \"pyspark==4.2.0\" 2>&1)",
+      "Bash(curl -sv \"https://api.github.com\")",
+      "Bash(echo \"EXIT:$?\")",
+      "PowerShell(try { $r = Invoke-RestMethod -Uri \"https://api.github.com/repos/cdarlint/winutils/contents/\" -TimeoutSec 20; $r | Select-Object -ExpandProperty name | Select-String \"^hadoop-3\\\\.\" } catch { \"ERROR: $_\" })",
+      "Bash(tasklist //FI \"IMAGENAME eq python.exe\")",
+      "Bash(.venv/Scripts/python.exe -c ' *)"
+    ]
+  }
+}

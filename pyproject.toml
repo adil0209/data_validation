@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "data-validation"
+version = "0.1.0"
+description = "PySpark data validation pipeline that writes results to Azure Data Lake Storage Gen2"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pyspark>=3.5.0,<5.0.0",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[project.scripts]
+run-validation-pipeline = "data_validation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,91 @@
+# Single source of truth for the pipeline: source, environment-specific
+# destinations, and validation rules. Secrets (Azure tenant/client id/secret)
+# still come from environment variables / .env -- see .env.example.
+
+dataset_name: orders
+
+# Which entry under `environments:` supplies the destination for this run.
+# Override per-invocation with --env, or the PIPELINE_ENV env var.
+environment: local
+
+source:
+  # Local path for dev/test. Swap for an abfss:// path to read from ADLS Gen2, e.g.:
+  #   abfss://raw@<storage_account>.dfs.core.windows.net/orders/
+  path: data/sample/orders.csv
+  format: csv
+
+environments:
+  local:
+    # Writes results to local disk instead of Azure -- useful for development
+    # and the sample run in the README, since it needs no Azure credentials.
+    destination:
+      path: data/output/orders_validation_results
+      format: parquet
+      write_mode: append
+      partition_by:
+        - run_date
+
+  azure:
+    # abfss://<container>@<storage_account>.dfs.core.windows.net/<path>
+    # Replace <storage_account> with the value of AZURE_STORAGE_ACCOUNT_NAME (or hardcode it here).
+    destination:
+      path: abfss://validation-results@mystorageaccount.dfs.core.windows.net/orders/
+      format: parquet
+      write_mode: append
+      partition_by:
+        - run_date
+
+rules:
+  - id: order_id_not_null
+    type: not_null
+    column: order_id
+    severity: error
+    description: order_id must always be populated
+
+  - id: order_id_unique
+    type: unique
+    column: order_id
+    severity: error
+    description: order_id must be unique across the dataset
+
+  - id: customer_email_not_null
+    type: not_null
+    column: customer_email
+    severity: error
+    description: customer_email must always be populated
+
+  - id: customer_email_format
+    type: regex
+    column: customer_email
+    pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+    severity: warning
+    description: customer_email should look like a valid email address
+
+  - id: order_amount_range
+    type: min_max
+    column: order_amount
+    min: 0
+    max: 100000
+    severity: error
+    description: order_amount must be between 0 and 100000
+
+  - id: order_status_allowed
+    type: allowed_values
+    column: order_status
+    values: [PENDING, SHIPPED, DELIVERED, CANCELLED, RETURNED]
+    severity: error
+    description: order_status must be one of the known lifecycle states
+
+  - id: discount_not_exceeding_amount
+    type: sql_expression
+    expression: discount_amount <= order_amount
+    severity: error
+    description: discount_amount can never exceed order_amount
+
+  - id: cancellation_rate_under_threshold
+    type: custom_sql
+    severity: warning
+    description: no more than 15% of orders should be CANCELLED or RETURNED
+    query: >-
+      SELECT * FROM orders WHERE order_status IN ('CANCELLED', 'RETURNED')
+      AND (SELECT COUNT(*) FROM orders WHERE order_status IN ('CANCELLED', 'RETURNED')) > 0.15 * (SELECT COUNT(*) FROM orders)
