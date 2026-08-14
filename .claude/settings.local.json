@@ -17,7 +17,10 @@
       "PowerShell(try { $r = Invoke-RestMethod -Uri \"https://api.github.com/repos/cdarlint/winutils/contents/\" -TimeoutSec 20; $r | Select-Object -ExpandProperty name | Select-String \"^hadoop-3\\\\.\" } catch { \"ERROR: $_\" })",
       "Bash(tasklist //FI \"IMAGENAME eq python.exe\")",
       "Bash(.venv/Scripts/python.exe -c ' *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
