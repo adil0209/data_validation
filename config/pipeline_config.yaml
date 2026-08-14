@@ -28,6 +28,9 @@ environments:
   azure:
     # abfss://<container>@<storage_account>.dfs.core.windows.net/<path>
     # Replace <storage_account> with the value of AZURE_STORAGE_ACCOUNT_NAME (or hardcode it here).
+    source:
+      path: abfss://test-data@testfilesadb.dfs.core.windows.net/orders/orders.csv
+      format: csv
     destination:
       path: abfss://test-results@testfilesadb.dfs.core.windows.net/results/
       format: parquet

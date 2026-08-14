@@ -21,7 +21,11 @@
       "Bash(git remote *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(rm \"C:\\\\Users\\\\adila\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-adila-OneDrive-Desktop-data-validation\\\\a8b07164-e606-4372-a102-754c0a669250\\\\scratchpad\\\\upload_test_file.py\" 2>/dev/null *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\adila\\AppData\\Local\\Temp"
     ]
   }
 }

@@ -176,6 +176,7 @@ downloaded, no network/Azure access needed) and cover:
       `environment: local`), now that the `azure` destination
       (`abfss://test-results@testfilesadb.dfs.core.windows.net/results/`) is a
       real, confirmed location rather than a scratch one.
-- [ ] Point `source.path` at real order data instead of the local
-      `data/sample/orders.csv`, once that data's location (local or
-      `abfss://`) is decided.
+- [x] Point the `azure` environment's source at real Azure data instead of the
+      local sample file -- it now reads
+      `abfss://test-data@testfilesadb.dfs.core.windows.net/orders/orders.csv`.
+      The `local` environment still reads `data/sample/orders.csv`.
