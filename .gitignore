@@ -20,4 +20,5 @@ derby.log
 data/output/
 .hadoop/
 pytest_pipeline_full.log
+.claude/settings.local.json
 
