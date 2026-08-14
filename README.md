@@ -169,3 +169,13 @@ downloaded, no network/Azure access needed) and cover:
   empty-DataFrame edge case (`tests/test_validators.py`)
 - the full read -> validate -> write pipeline against the sample dataset,
   including reading the Parquet output back (`tests/test_pipeline.py`)
+
+## TODO
+
+- [ ] Make `azure` the default environment in `pipeline_config.yaml` (currently
+      `environment: local`), now that the `azure` destination
+      (`abfss://test-results@testfilesadb.dfs.core.windows.net/results/`) is a
+      real, confirmed location rather than a scratch one.
+- [ ] Point `source.path` at real order data instead of the local
+      `data/sample/orders.csv`, once that data's location (local or
+      `abfss://`) is decided.

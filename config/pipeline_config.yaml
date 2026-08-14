@@ -29,7 +29,7 @@ environments:
     # abfss://<container>@<storage_account>.dfs.core.windows.net/<path>
     # Replace <storage_account> with the value of AZURE_STORAGE_ACCOUNT_NAME (or hardcode it here).
     destination:
-      path: abfss://validation-results@mystorageaccount.dfs.core.windows.net/orders/
+      path: abfss://test-results@testfilesadb.dfs.core.windows.net/results/
       format: parquet
       write_mode: append
       partition_by:
